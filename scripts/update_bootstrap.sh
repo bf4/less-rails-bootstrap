@@ -9,20 +9,11 @@ lrb_fw_dir="$lrb_dir/vendor/frameworks/twitter/bootstrap"
 
 if [ ! -d $bs_dir ]; then
     echo "Bootstrap not found. You might want to clone the bootstrap repo from http://twitter.github.com/bootstrap/ into $bs_dir"
-    exit 1
+    cd ../../
+    git clone git://github.com/twitter/bootstrap.git twitter/bootstrap
+    cd $lrb_dir/scripts
+    # exit 1
 fi
-
-# images
-for f in $bs_dir/img/*; do
-    bn=$(basename $f)
-    cp $f $lrb_img_dir/$bn
-done
-
-# scripts
-for f in $bs_dir/js/*.js; do
-    bn=$(basename $f)
-    cp $f $lrb_js_dir/${bn/bootstrap-/}
-done
 
 # styles
 for f in $bs_dir/less/*.less; do
